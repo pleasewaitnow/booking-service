@@ -6,7 +6,7 @@ This project serves as a sample implementation of a RESTful web service capable 
 
 To get started, clone this project and ensure that the required dependencies are installed (JDK 8 is necessary). Then, execute the App.java file.
 
-### Postman collection
+### Postman collection:
 
 You can access the postman collection including all endpoints [here](endpoints.postman_collection.json).
 You can use this collection to interact with the web service effortlessly.
