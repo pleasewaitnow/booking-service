@@ -1,0 +1,236 @@
+{
+	"info": {
+		"_postman_id": "88683def-a33a-4c98-ad5e-263ae041a789",
+		"name": "endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28844540"
+	},
+	"item": [
+		{
+			"name": "createBooking",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\": \"Cool description!\",\r\n    \"price\": 50.00,\r\n    \"currency\": \"USD\",\r\n    \"subscription_start_date\": 683124845000,\r\n    \"email\": \"valid@email.ok\",\r\n    \"department\": \"Sales Department\",\r\n    \"storage_path\": \"/storgage/2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/bookingservice/bookings",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bookingservice",
+						"bookings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateBooking",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\": \"This is just different\",\r\n    \"price\": 27.99,\r\n    \"currency\": \"EUR\",\r\n    \"subscription_start_date\": 683124877000,\r\n    \"email\": \"someother@email.com\",\r\n    \"department\": \"People Department\",\r\n    \"storage_path\": \"/storgage/213\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/bookingservice/bookings/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bookingservice",
+						"bookings",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getBookingById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/bookingservice/bookings/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bookingservice",
+						"bookings",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update an existing booking",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\": \"This is just different\",\r\n    \"price\": 27.00,\r\n    \"currency\": \"USD\",\r\n    \"subscription_start_date\": 683124877000,\r\n    \"email\": \"someother@email.com\",\r\n    \"department\": \"People Department\",\r\n    \"storage_path\": \"/storgage/213\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/bookingservice/bookings/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bookingservice",
+						"bookings",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "not found booking",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/bookingservice/bookings/13213",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bookingservice",
+						"bookings",
+						"13213"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getBookingsCurrencies",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/bookingservice/bookings/currencies",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bookingservice",
+						"bookings",
+						"currencies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllDepartmentBookings",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/bookingservice/bookings/department/Sales Department",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bookingservice",
+						"bookings",
+						"department",
+						"Sales Department"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getSumOfBooking [for a currency]",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/bookingservice/sum/USD",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bookingservice",
+						"sum",
+						"USD"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "doBusiness",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/bookingservice/bookings/dobusiness/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"bookingservice",
+						"bookings",
+						"dobusiness",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
