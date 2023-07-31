@@ -7,7 +7,8 @@ public class Department {
         this.departmentName = departmentName;
     }
 
-    public void doBusiness() {
-        System.out.println("Generic business operation for " + departmentName);
+    public Business doBusiness() {
+        System.out.println("business operation for " + departmentName);
+        return null;
     }
 }

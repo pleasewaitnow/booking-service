@@ -1,5 +1,7 @@
 package com.statista.code.challenge;
 import com.statista.code.challenge.model.Booking;
+import com.statista.code.challenge.model.Business;
+import com.statista.code.challenge.model.Department;
 import com.statista.code.challenge.service.BookingService;
 import com.statista.code.challenge.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,10 +10,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 /**
- * this is our API endpoints
+ * @apiNote all of our API endpoints are located here
  */
 
 @Controller
@@ -32,7 +35,7 @@ public class FooBarController {
 
     @PostMapping("/bookings")
     public ResponseEntity createBooking(@RequestBody Booking booking) {
-        bookingService.save(booking);
+        bookingService.save(booking.getBooking_id(), booking);
         emailService.send(booking.getEmail());
 
         return new ResponseEntity<>(booking, HttpStatus.OK);
@@ -40,7 +43,7 @@ public class FooBarController {
     @PutMapping("/bookings/{booking_id}")
     public ResponseEntity updateBooking(@PathVariable int booking_id, @RequestBody Booking requestBooking) {
         requestBooking.setBooking_id(booking_id);
-        Optional<Booking> booking = bookingService.getBookingById(booking_id);
+        Optional<Booking> booking = bookingService.get(booking_id);
 
         if (! booking.isPresent()) {
             return this.createBooking(requestBooking);
@@ -52,7 +55,7 @@ public class FooBarController {
     }
     @GetMapping("/bookings/{booking_id}")
     public ResponseEntity getBookingById(@PathVariable int booking_id) {
-        Optional<Booking> booking = bookingService.getBookingById(booking_id);
+        Optional<Booking> booking = bookingService.get(booking_id);
 
         if (! booking.isPresent()) {
             return ResponseEntity.notFound().build();
@@ -63,18 +66,28 @@ public class FooBarController {
 
     @GetMapping("/bookings/department/{department}")
     public ResponseEntity getDepartmentBookingsList(@PathVariable String department) {
-        return ResponseEntity.ok().build();
+
+
+        return new ResponseEntity<>(bookingService.getBookingsByDepartmentName(department), HttpStatus.OK);
     }
     @GetMapping("/bookings/currencies")
     public ResponseEntity getBookingsCurrencies() {
-        return ResponseEntity.ok().build();
+        return new ResponseEntity<>(bookingService.getBookingCurrencies(), HttpStatus.OK);
     }
     @GetMapping("/sum/{currency}")
-    public ResponseEntity getBookingsCurrencySum(@PathVariable String currency) {
-        return ResponseEntity.ok().build();
+    public ResponseEntity getBookingsCurrencySum(@PathVariable Booking.CurrencyType currency) {
+        return new ResponseEntity<>(bookingService.getSumPrice(currency), HttpStatus.OK);
     }
     @GetMapping("/bookings/dobusiness/{booking_id}")
-    public ResponseEntity getBookingDoBusiness(@PathVariable String booking_id) {
-        return ResponseEntity.ok().build();
+    public ResponseEntity<Business> getBookingDoBusiness(@PathVariable int booking_id) {
+        Optional<Booking> booking = bookingService.get(booking_id);
+
+        if (! booking.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Business businessOutCome = booking.get().getDepartmentObj().doBusiness();
+
+        return new ResponseEntity<>(businessOutCome, HttpStatus.OK);
     }
 }

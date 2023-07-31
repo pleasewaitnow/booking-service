@@ -3,16 +3,12 @@ package com.statista.code.challenge.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.sql.Time;
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Booking {
-    private static final AtomicInteger bookingIdCounter = new AtomicInteger(100);
+    private static final AtomicInteger bookingIdCounter = new AtomicInteger(1);
 
-
-    // @JsonIgnore
     @JsonProperty("booking_id")
     private int booking_id;
 
@@ -23,7 +19,7 @@ public class Booking {
     private double price;
 
     @JsonProperty("currency")
-    private CurrencyType currency;
+    private CurrencyType currency; // @todo switch to java.util.Currency
 
     @JsonProperty("subscription_start_date")
     private Timestamp subscription_start_date;
@@ -106,6 +102,11 @@ public class Booking {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @JsonIgnore
+    public Department getDepartmentObj() {
+        return department;
     }
 
     public String getDepartment() {
