@@ -1,13 +1,9 @@
 package com.statista.code.challenge.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.time.LocalDateTime;
 import java.util.Random;
 
 public class Business {
-
-    @JsonProperty("booking_id")
     private LocalDateTime timestamp;
     private String departmentName;
     private String agent;
@@ -39,6 +35,8 @@ public class Business {
         return agent;
     }
 
+
+    // generates random fake names as agents doing the doBusiness()
     private String generateRandomAgentName() {
         String[] agentNames = { "Max", "Amy", "Mike", "Marina", "Alex", "Olivia", "William" };
         int randomIndex = new Random().nextInt(agentNames.length);

@@ -1,16 +1,15 @@
 package com.statista.code.challenge;
 import com.statista.code.challenge.model.Booking;
 import com.statista.code.challenge.model.Business;
-import com.statista.code.challenge.model.Department;
 import com.statista.code.challenge.service.BookingService;
 import com.statista.code.challenge.service.EmailService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 /**
@@ -32,7 +31,6 @@ public class FooBarController {
         this.bookingService = bookingService;
         this.emailService = emailService;
     }
-
     @PostMapping("/bookings")
     public ResponseEntity createBooking(@RequestBody Booking booking) {
         bookingService.save(booking.getBooking_id(), booking);
@@ -63,7 +61,6 @@ public class FooBarController {
 
         return new ResponseEntity<>(booking, HttpStatus.OK);
     }
-
     @GetMapping("/bookings/department/{department}")
     public ResponseEntity getDepartmentBookingsList(@PathVariable String department) {
 
@@ -86,7 +83,7 @@ public class FooBarController {
             return ResponseEntity.notFound().build();
         }
 
-        Business businessOutCome = booking.get().getDepartmentObj().doBusiness();
+        Business businessOutCome = booking.get().getDepartment().doBusiness();
 
         return new ResponseEntity<>(businessOutCome, HttpStatus.OK);
     }

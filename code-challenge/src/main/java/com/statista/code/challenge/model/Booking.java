@@ -27,7 +27,7 @@ public class Booking {
     private String email;
 
     @JsonProperty("department")
-    private Department department;
+    private String department_name;
 
     @JsonProperty("storage_path")
     private String storage_path;
@@ -40,14 +40,13 @@ public class Booking {
     public Booking() {}
 
     public Booking(int booking_id, String description, double price, CurrencyType currency,
-                   Timestamp subscription_start_date, String email, Department department, String storage_path) {
+                   Timestamp subscription_start_date, String email, String storage_path) {
         this.booking_id = booking_id;
         this.description = description;
         this.price = price;
         this.currency = currency;
         this.subscription_start_date = subscription_start_date;
         this.email = email;
-        this.department = department;
         this.storage_path = storage_path;
     }
 
@@ -105,16 +104,28 @@ public class Booking {
     }
 
     @JsonIgnore
-    public Department getDepartmentObj() {
-        return department;
+    public Department getDepartment() {
+        if (this.department_name.equals("Acounting Department")) {
+            return AccountingDepartment.getInstance();
+        }
+
+        if (this.department_name.equals("People Department")) {
+            return PeopleDepartment.getInstance();
+        }
+
+        if (this.department_name.equals("Sales Department")) {
+            return SalesDepartment.getInstance();
+        }
+
+        return null;
     }
 
-    public String getDepartment() {
-        return department.departmentName;
+    public String getDepartment_name() {
+        return department_name;
     }
 
-    public void setDepartment(Department department) {
-        this.department = department;
+    public void setDepartment_name(String departmentName) {
+        this.department_name = departmentName;
     }
 
     public String getStorage_path() {
