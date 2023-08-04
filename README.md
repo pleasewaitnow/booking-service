@@ -1,4 +1,4 @@
-## Hi!
+## Hi
 
 This project serves as a sample implementation of a RESTful web service capable of storing booking objects in memory and providing information about them.
 
